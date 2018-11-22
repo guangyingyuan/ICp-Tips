@@ -7,7 +7,7 @@ In this entry, I cover the functional case where
 a developer needs to push images in the ICp image registry but have no other permissions on ICp platform except the view.
 
 1. Create an user with `viewer` profile.
-![Users from team view](./images/rbac_add_priviledges_1.png)
+![Users from team view](./image/rbac_add_priviledges_1.png)
   The sample in this page is base on an user `tadeveloper` who is member of `teama` and has namespece `nsta` as resources.
 
 2. Create a file describing the new `clusterroles` providing additional priviledges.
@@ -34,7 +34,7 @@ kubectl apply -f developer-clusterroles.yaml
 ```
 kubectl get clusterroles
 ```
-![clusterroles list](./images/rbac_add_priviledges_2.png)
+![clusterroles list](./image/rbac_add_priviledges_2.png)
 
 5. Create the role binding for `tadeveloper`on clusterroles `icp:develop`.
 ```
@@ -46,10 +46,10 @@ kubectl create rolebinding icp:teama:developer --clusterrole=icp:develop --user=
 ```
 kubectl describe rolebindings icp:teama:developer -n nsta
 ```
-![role description](./images/rbac_add_priviledges_8.png)
+![role description](./image/rbac_add_priviledges_8.png)
 
 7. verify that `tadeveloper` could now push images on the ICp image registry.
-![pushing images](./images/rbac_add_priviledges_7.png)
+![pushing images](./image/rbac_add_priviledges_7.png)
 
 Basically, as tadeveloper was created as a viewer, he could not initially push images to the registry. But by binding him to the `icp:develop` cluster role in his namespace `nsta`, he could now push images to namespace `nsta`.
 User taviewer could not push image as the user is not bind to the clusterrole `icp:develop`
